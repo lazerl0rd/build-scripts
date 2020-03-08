@@ -20,7 +20,7 @@ git pull >/dev/null
 make clean
 autoconf configure.ac > configure
 chmod +x configure
-CC=clang CFLAGS="-O3 -march=native -Wp,-D_FORTIFY_SOURCE=2" ./configure --prefix="/usr" --with-openssl="../../libraries/quiche/deps/boringssl" --with-zlib="../../libraries/zlib"
+CC=clang CFLAGS="-O3 -march=native -mllvm -polly -Wp,-D_FORTIFY_SOURCE=2" ./configure --prefix="/usr" --with-openssl="../../libraries/quiche/deps/boringssl" --with-zlib="../../libraries/zlib"
 
 # Hack due to "doc" not building prior to "info".
 AR=llvm-ar CXX=clang++ NM=llvm-nm OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump STRIP=llvm-strip make all info -j"$(nproc)"
